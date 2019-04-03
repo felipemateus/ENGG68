@@ -1,12 +1,18 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <stdlib.h>
 #include <netinet/in.h>
+#include <string.h>
 
 
 int main(){
+    int sockfd = 0;
+    int newsockfd = 0;
+    int valread = 0;
+    char buffer[256] = {0};
     //Cria o socket, AF_INET:familiaipv4, SOCK_STREAM:protocolo TCP,
-    int sockfd = socket(AF_INET,SOCK_STREAM,0);
+    sockfd = socket(AF_INET,SOCK_STREAM,0);
     if(sockfd<0){
         printf("error/n");
     }
@@ -27,11 +33,16 @@ int main(){
     struct sockaddr_in cli_addr;
 
     clilen = sizeof(cli_addr);
-    int newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr,&clilen);
+    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr,&clilen);
 
     if(newsockfd<0){
         printf("Erro na aceitação");
     }
+    //mensagem do cliente
+    valread =  read(newsockfd,buffer,256);
+
+    printf("%s\n",buffer);
+
 
     printf("hello\n");
 }

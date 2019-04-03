@@ -17,6 +17,7 @@ int main(){
     if(sockfd<0){
         printf("error");
     }
+    char *hello = "alo do cliente!";
     char buffer[256];
     struct sockaddr_in serv_addr;
     struct hostent *server;
@@ -30,6 +31,6 @@ int main(){
     if(connect(sockfd,(struct sockaddr *)&serv_addr, sizeof(serv_addr))<0){
         printf("Erro na connexão\n");
     }
-
+    send(sockfd,hello,strlen(hello),0);
     printf("hello\n");
 }
