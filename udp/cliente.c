@@ -14,7 +14,7 @@
 
 
 int main(){
-    int sockfd = socket(AF_INET,SOCK_STREAM,0);
+    int sockfd = socket(AF_INET,SOCK_DGRAM,0);
     int valread = 0;
     char buffer[256]  = {0};
     clock_t  start_t = 0;
@@ -25,6 +25,7 @@ int main(){
     }
     char *hello = "alo do cliente!";
     struct sockaddr_in serv_addr;
+    socklen_t fromlen = sizeof(struct sockaddr_in);
     struct hostent *server;
     //endereco ip do servidor
     server = gethostbyname("10.131.16.167");
@@ -36,16 +37,17 @@ int main(){
 
     start_t = clock();
 
-    
-    if(connect(sockfd,(struct sockaddr *)&serv_addr, sizeof(serv_addr))<0){
+    valread =  sendto(sockfd,hello,256,0, (struct sockaddr *)&serv_addr,fromlen);
+    if(valread < 0){
         printf("Erro na connexão\n");
     }
 
     
     //lê mensagem de boas vindas do servidor.
-    valread =  read(sockfd,buffer,256);
-    printf("%s\n", buffer);
-    printf("Digite o codigo da discliplina:\n");
+    //valread =  read(sockfd,buffer,256);
+    //valread =  sendto(sockfd,buffer,256);
+    //printf("%s\n", buffer);
+    //printf("Digite o codigo da discliplina:\n");
 
     //while(1){
     //    scanf("%s",buffer);
