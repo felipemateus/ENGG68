@@ -1,12 +1,20 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <stdlib.h>
 #include <netinet/in.h>
 #include <string.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+#define QTD 4
 
 
 int main(){
+    //listaDeDisciplinas list;
+    //ininicializa(&list);
     int sockfd = 0;
     int newsockfd = 0;
     int valread = 0;
@@ -37,12 +45,22 @@ int main(){
 
     if(newsockfd<0){
         printf("Erro na aceitação");
+        return 0;
+    }else{
+        write(newsockfd,"Seja bem vindo, qual disciplina vc deseja identificar?",54);
+    }
+    while(1){
+
+        valread =  read(newsockfd,buffer,256);
+        printf("%s\n",buffer);
+        write(newsockfd,"TOPICOS ESPECIAIS EM ENGENHARIA DA COMPUTAÇÃO 2",50);
+
+
     }
     //mensagem do cliente
-    valread =  read(newsockfd,buffer,256);
-
-    printf("%s\n",buffer);
 
 
-    printf("hello\n");
+
+    close(newsockfd);
+
 }
