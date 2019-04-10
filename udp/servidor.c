@@ -20,7 +20,7 @@ int main(){
     int valread = 0;
     char buffer[256] = {0};
     //Cria o socket, AF_INET:familiaipv4, SOCK_STREAM:protocolo TCP,
-    sockfd = socket(AF_INET,SOCK_STREAM,0);
+    sockfd = socket(AF_INET,SOCK_DGRAM,0);
     if(sockfd<0){
         printf("error/n");
     }
@@ -38,22 +38,23 @@ int main(){
     listen(sockfd,5);
 
     socklen_t  clilen;
-    struct sockaddr_in cli_addr;
+    struct sockaddr_in from;
 
-    clilen = sizeof(cli_addr);
-    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr,&clilen);
+    socklen_t fromlen = sizeof(struct sockaddr_in);
+
+    newsockfd = recvfrom(sockfd, buffer,256,0, (struct sockaddr *) &from, &fromlen);
 
     if(newsockfd<0){
         printf("Erro na aceitação");
         return 0;
     }else{
-        write(newsockfd,"Seja bem vindo, qual disciplina vc deseja identificar?",54);
+        //write(newsockfd,"Seja bem vindo, qual disciplina vc deseja identificar?",54);
     }
     while(1){
 
-        valread =  read(newsockfd,buffer,256);
+        //valread =  read(newsockfd,buffer,256);
         printf("%s\n",buffer);
-        write(newsockfd,"TOPICOS ESPECIAIS EM ENGENHARIA DA COMPUTAÇÃO 2",50);
+        //write(newsockfd,"TOPICOS ESPECIAIS EM ENGENHARIA DA COMPUTAÇÃO 2",50);
 
 
     }
