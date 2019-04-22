@@ -42,26 +42,22 @@ int main(){
 
     socklen_t fromlen = sizeof(struct sockaddr_in);
 
-    newsockfd = recvfrom(sockfd, buffer,256,0, (struct sockaddr *) &from, &fromlen);
-
-    if(newsockfd<0){
-        printf("Erro na aceitação");
-        return 0;
-    }else{
-        //write(newsockfd,"Seja bem vindo, qual disciplina vc deseja identificar?",54);
-    }
     while(1){
-
-        //valread =  read(newsockfd,buffer,256);
+        newsockfd = recvfrom(sockfd, buffer,256,0, (struct sockaddr *) &from, &fromlen);
         printf("%s\n",buffer);
-        //write(newsockfd,"TOPICOS ESPECIAIS EM ENGENHARIA DA COMPUTAÇÃO 2",50);
 
+        if(newsockfd<0){
+            printf("Erro na aceitação");
+            return 0;
+        }else{
+            sendto(sockfd,"Seja bem vindo",54,0,(struct sockaddr *) &from, fromlen );
+        }
 
+        //valread =  recvfrom(sockfd,buffer,256,0,(struct sockaddr *) &from, &fromlen);
     }
-    //mensagem do cliente
 
 
 
-    close(newsockfd);
+    close(sockfd);
 
 }

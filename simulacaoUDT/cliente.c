@@ -28,7 +28,7 @@ int main(){
     socklen_t fromlen = sizeof(struct sockaddr_in);
     struct hostent *server;
     //endereco ip do servidor
-    server = gethostbyname("10.131.16.167");
+    server = gethostbyname("localhost");
     bzero((char *) &serv_addr,sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
 
@@ -42,21 +42,11 @@ int main(){
         printf("Erro na connexão\n");
     }
 
+    valread =  recvfrom(sockfd,buffer,256,0,(struct sockaddr *)&serv_addr,&fromlen);
     
-    //lê mensagem de boas vindas do servidor.
-    //valread =  read(sockfd,buffer,256);
-    //valread =  sendto(sockfd,buffer,256);
-    //printf("%s\n", buffer);
-    //printf("Digite o codigo da discliplina:\n");
-
-    //while(1){
-    //    scanf("%s",buffer);
-    //    write(sockfd,buffer,strlen(buffer));
-    //    valread =  read(sockfd,buffer,256);
-    //    printf("%s\n",buffer);
-    //} 
-
-    //write(sockfd,hello,strlen(hello));
+    printf("%s\n",buffer);
+    
+    
 
     close(sockfd);
 

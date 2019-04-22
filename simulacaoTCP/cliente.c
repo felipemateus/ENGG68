@@ -36,7 +36,7 @@ int main(){
     bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr,server->h_length);
     serv_addr.sin_port = htons(5000);
 
-    //start_t = clock();
+    start_t = clock();
 
     
     if(connect(sockfd,(struct sockaddr *)&serv_addr, sizeof(serv_addr))<0){
@@ -46,23 +46,18 @@ int main(){
     
     //lê mensagem de boas vindas do servidor.
     valread =  read(sockfd,buffer,256);
-    printf("%s\n", buffer);
-    printf("Digite o codigo da discliplina:\n");
+    printf("%s\n",buffer);
+    
 
-    while(1){
-        scanf("%s",buffer);
-        write(sockfd,buffer,strlen(buffer));
-        valread =  read(sockfd,buffer,256);
-        printf("%s\n",buffer);
-    } 
-
+    
+    //envia mensagem para o servidor
     write(sockfd,hello,strlen(hello));
 
     close(sockfd);
 
-    //end_t = clock();
+    end_t = clock();
 
-    //printf("tempo____: %f /n", ((float)(end_t - start_t)/CLOCKS_PER_SEC)*1000);
+    printf("tempo____: %f \n", ((float)(end_t - start_t)/CLOCKS_PER_SEC)*1000);
 
     
 }
