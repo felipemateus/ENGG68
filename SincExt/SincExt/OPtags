@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+FlyportTask	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^void FlyportTask()$/;"	kind:f	line:23
+GMT_hour_adding	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^int GMT_hour_adding = 3;$/;"	kind:v	line:20
+OnConnectionFailed	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\WF_Events.c	/^void OnConnectionFailed(UINT8 ev, UINT16 evinfo)$/;"	kind:f	line:16
+OnConnectionPermLost	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\WF_Events.c	/^void OnConnectionPermLost(UINT8 ev, UINT16 evinfo)$/;"	kind:f	line:34
+OnConnectionReestablished	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\WF_Events.c	/^void OnConnectionReestablished(UINT8 ev, UINT16 evinfo)$/;"	kind:f	line:28
+OnConnectionSuccessful	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\WF_Events.c	/^void OnConnectionSuccessful(UINT8 ev, UINT16 evinfo)$/;"	kind:f	line:9
+OnConnectionTempLost	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\WF_Events.c	/^void OnConnectionTempLost(UINT8 ev, UINT16 evinfo)$/;"	kind:f	line:22
+OnScanResult	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\WF_Events.c	/^void OnScanResult(UINT8 ev, UINT16 evinfo)$/;"	kind:f	line:41
+ScanCompleted	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\WF_Events.c	/^BOOL ScanCompleted = FALSE;$/;"	kind:v	line:7
+buf	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\WF_Events.c	/^	char buf[8];$/;"	kind:l	line:44
+dateUTC	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^char dateUTC[100];$/;"	kind:v	line:14
+dateUTC1	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^char dateUTC1[50];$/;"	kind:v	line:15
+epoch	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^DWORD epoch = 0;$/;"	kind:v	line:12
+epochtime	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^DWORD epochtime = 0xA2C2A;$/;"	kind:v	line:13
+mytime	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^struct tm mytime;$/;"	kind:v	line:10	typeref:struct:tm
+now	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^time_t now;$/;"	kind:v	line:8
+string_serial	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^char string_serial[60] = "waiting ...";$/;"	kind:v	line:7
+ts	C:\Users\lipeM\Desktop\ENGG68-MAT\SincExt\SincExt\taskFlyport.c	/^struct tm *ts;$/;"	kind:v	line:9	typeref:struct:tm

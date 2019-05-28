@@ -29,7 +29,7 @@ int main(){
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_family = AF_INET;
     //htons é responsavel pelo ordenamento dos bytes.
-    serv_addr.sin_port = htons(5000);
+    serv_addr.sin_port = htons(5555);
     //o metodo bind faz a associação a uma porta especifica
     if(bind(sockfd, (struct sockaddr*) &serv_addr,sizeof(serv_addr)) < 0){
         printf("error/n");
