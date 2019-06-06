@@ -17,7 +17,7 @@ void *iniciaTimer(void *args){
     printf("Thread criada com sucesso!\n");
     int t = 0;
     while(1){
-        sleep(1.02);
+        sleep(1.05);
         current_time->tm_sec++;
         t++;
         //correção do tempo
@@ -31,10 +31,10 @@ void *iniciaTimer(void *args){
         }
         //ficou faltando as outras correções
             
-        if(t == 5){
-            t=0;
-            printf("\ntempo: min = %d, sec = %d\n",current_time->tm_min,current_time->tm_sec); 
-        }
+        //if(t == 5){
+        //    t=0;
+        //    printf("\ntempo: min = %d, sec = %d\n",current_time->tm_min,current_time->tm_sec); 
+        //}
             
     }
 
@@ -66,7 +66,7 @@ int main(){
     if(sockfd<0){
         printf("error");
     }
-    char *hello = "alo do cliente 1!";
+    char *hello = "alo do cliente 3!";
     struct sockaddr_in serv_addr;
     socklen_t fromlen = sizeof(struct sockaddr_in);
     struct hostent *server;
@@ -81,17 +81,26 @@ int main(){
     start_t = clock();
 
     while(1){
-        printf("Cliente  1  \n");
+        printf("Cliente  3  \n");
 
-        sleep(5);
+        //sleep(5);
 
-        valread =  sendto(sockfd,hello,256,0, (struct sockaddr *)&serv_addr,fromlen);
+        valread =  sendto(sockfd    ,hello,256,0, (struct sockaddr *)&serv_addr,fromlen);
         if(valread < 0){
         printf("Erro na connexão\n");
         }
         valread =  recvfrom(sockfd,(struct tm *)server_time,(int) sizeof(server_time),0,(struct sockaddr *)&serv_addr,&fromlen);
-    
-        printf("tempo em min:%d\n",server_time->tm_min);
+
+        //Tenho que comparar o tempo recebido com o atual
+        if(current_time->tm_sec - server_time->tm_sec >0.100){
+            printf("TEMPO CORRIGIDO!");
+            current_time = server_time;
+
+        }        
+
+
+        printf("Tempo do servidor em min: %d    -    sec: %d \n", current_time->tm_min,current_time->tm_sec);
+
 
 
     }

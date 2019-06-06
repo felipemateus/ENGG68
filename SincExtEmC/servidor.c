@@ -17,8 +17,7 @@ int main(){
     //configuração do time
     time_t s;
     struct tm* current_time;
-    s = time(NULL);
-    current_time = localtime(&s);
+    //s = time(NULL);
     
     //configração da conexão udp
     int sockfd = 0;
@@ -49,6 +48,8 @@ int main(){
     socklen_t fromlen = sizeof(struct sockaddr_in);
 
     while(1){
+        s = time(NULL);
+        current_time = localtime(&s);
 
         newsockfd = recvfrom(sockfd, buffer,256,0, (struct sockaddr *) &from, &fromlen);
         printf("%s\n",buffer);
@@ -59,7 +60,8 @@ int main(){
             return 0;
         }else{
             //sendto(sockfd,"Seja bem vindo",54,0,(struct sockaddr *) &from, fromlen );
-            printf("Tempo em min: %d    -    sec: %d \n", current_time->tm_min,current_time->tm_sec);
+
+            printf("Tempo do servidor em min: %d    -    sec: %d \n", current_time->tm_min,current_time->tm_sec);
             sendto(sockfd,(struct tm *)current_time, (int) sizeof(current_time),0,(struct sockaddr *) &from, fromlen );
         
         }
