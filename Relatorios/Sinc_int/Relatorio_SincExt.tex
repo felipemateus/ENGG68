@@ -1,0 +1,113 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[portuges]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{multicol,lipsum}
+\usepackage{listings}
+
+\lstdefinestyle{mystyle}{
+   basicstyle=\normalsize,
+   columns=fullflexible,
+   breaklines=true   
+}
+\lstset{style=mystyle}
+\begin{document}
+%\maketitle
+
+\begin{titlepage}
+	\begin{center}
+	
+	%\begin{figure}[!ht]
+	%\centering
+	%\includegraphics[width=2cm]{c:/ufba.jpg}
+	%\end{figure}
+
+		\Huge{Universidade Federal da Bahia}\\
+		\large{Departamento de Engenharia Elétrica e de Computação}\\ 
+		\large{Escola Politécnica}\\ 
+		\vspace{15pt}
+        \vspace{95pt}
+        \textbf{\LARGE{Relatório (Sincronização Externa) }}\\
+		%\title{{\large{Título}}}
+		\vspace{8,5cm}
+	\end{center}
+	
+	\begin{flushleft}
+		\begin{tabbing}
+			Aluno: \\
+			Felipe Boaventura \\
+			Marcelo Fernandes\\
+			Juliete  \\
+	\end{tabbing}
+ \end{flushleft}
+	\vspace{1cm}
+	
+	\begin{center}
+		\vspace{\fill}
+			 junho\\
+		 2019
+			\end{center}
+\end{titlepage}
+
+\newpage
+% % % % % % % % % % % % % % % % % % % % % % % % % %
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage
+\pagenumbering{arabic}
+% % % % % % % % % % % % % % % % % % % % % % % % % % %
+\section{Introdução}
+Microcontroladores consistem em circuitos integrados ou chips inteligentes, que como qualquer sistema computacional possuem processador, memória e dispositivos I/O. A grande diferença entre microcontroladores e computadores de propósito geral é que os microcontroladores possuem toda a sua estrutura encapsulada dentro de um CI com todos os circuitos necessários para realizar um completo sistema digital programável e realizam tarefas específicas e muito bem definidas.
+
+Um dos microcontroladores mais famosos são os PIC's (controlador integrado de periféricos) produzidos pela Microchip Technology. Grande parte da sua fama vem da graças a seu baixo custo, alta disponibilidade, extensa base de usuários etc. Entre as diversas famílias do PIC temos a família PIC24F cuja arquitetura consiste na arquitetura Harvard modificada, programa e memória de dados são acessados por barramentos separados. O RTCC (Real Time Clock Calendar) consiste em módulo presente na família PIC24 que funciona como um alarme porém ele possui muito mais funcionalidades do que um simples alarme comum, várias configurações podem ser realizadas para que o RTCC funcione realizando funcionalidades específicas. Podemos por exemplo realizar implementações envolvendo o RTCC para que dentro de uma gama de dias, semanas, meses ou anos certas linhas de código sejam executadas, ou seja, permite ao programador gerar interrupções em momentos específicos conforme previamente programado.O módulo RTCC usa cinco registradores que são mapeados pela memória diretamente. Oito registradores adicionais que são usados para armazenar os valores de hora e alarme entre outros. Porém existe um framework que permite a utilização do módulo RTCC sem que exista a necessidade de utilizar os registradores do mesmo.
+
+O projeto de sistemas embarcados distribuídos deve-se levar em consideração questões relevantes para o bom funcionamento da aplicação, principalmente em sistemas críticos. A sincronização de módulos distribuídos é uma matéria importante nesse cenário, existindo duas formas de sincronização, sincronização interna e externa. Esse trabalho trata apenas da sincronização externa.
+
+A avaliação foi feita utilizando um módulo FlyPort com o intuito de se identificar  desvios de clock. À sincronização é feita com auxílio do protocolo SNTP derivado do NTP, tal protocolo utiliza UDP para captar informações temporárias com alta fidelidade e baixa latência.
+\newpage
+
+\section{Fundamentos}
+
+A Sincronização externa funciona levando-se em consideração o recebimento de um tempo corrigido de uma fonte externa. A informação ou mensagem de tempo pode ser obtida utilizando várias fontes temporais como GPS ou um relógio atômico por exemplo.
+
+A fonte de informação temporal envia periodicamente mensagens de tempo que acionam eventos de sincronização em nós de interligados e essa informação é propagada. Para tal comunicação é utilizado o protocolo SNTP que transporta à informação de tempo em segundo desde 1º de janeiro de 1970.
+
+
+\section{Desenvolvimento}
+Como já foi informado anteriormente foi utilizado um módulo Flyport conectado via WIFI e toda implementação se deu utilizando algumas estrutura presentes nas biblioteca “time.h”  e funções disponibilizadas no módulo RTCC.
+	As estruturas presentes na biblioteca “time.h” são necessárias para utilizar medidas de tempo e clock no processo de sincronização. O módulo RTCC  fornece um API para gerar interrupções temporizadas que funcionam como alarmes. Para configurar o alarme é utilizada à função RTCCAlarmConf com os seguintes parâmetros :
+\begin{lstlisting}
+RTCCAlarmConf(ts,REPEAT_INFINITE, EVERY_HALF_SEC, &set_analogOutput);}
+\end{lstlisting}
+
+	Note que é passado como parâmetro um ponteiro de função, tal função será executada cada vez que o alarme for disparado.
+	
+
+A análise de tempo foi feita utilizando uma saída analógica(p17) em que à cada meio segundo é disparado um alarme que inverte à tensão da saída. Inicialmente 
+
+
+\newpage
+
+\section{Conclusão}
+
+\newpage
+
+\addcontentsline{toc}{section}{Bibliografia}
+\section*{Bibliografia}
+\footnotesize{
+
+\noindent AGUIRRE, L. A. Introdução à Identificação de Sistemas, Técnicas Lineares e Não lineares Aplicadas a Sistemas Reais. Belo Horizonte, Brasil, EDUFMG. 2004.\\
+
+}
+\newpage
+\addcontentsline{toc}{section}{Anexo}
+\section*{Anexo}
+\end{document}
+
+
+

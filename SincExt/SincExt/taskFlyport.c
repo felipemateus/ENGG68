@@ -2,8 +2,14 @@
 #include "time.h"
 //#include "rtcc.h"
 
-
-
+BOOL estado = TRUE;
+void set_analogOutput(){
+	if(estado)
+		IOPut(p17,on);
+	else
+		IOPut(p17,off);
+	estado = !estado;
+}	
 char string_serial[60] = "waiting ...";
 time_t now;
 struct tm *ts;
@@ -37,11 +43,13 @@ void FlyportTask()
 	}
 	
 	UARTWrite(1,"done!\r\n");
+
 	//Para converter DWORD para forma amigável
 	//DMWORD => time_t -> struct tm
 	epoch =  SNTPGetUTCSeconds();
 	now = (time_t)epoch;
 	ts = localtime(&now);
+
 	vTaskDelay(20);
 	ts->tm_hour = (ts->tm_hour + GMT_hour_adding);
 	
@@ -54,21 +62,36 @@ void FlyportTask()
 		ts->tm_hour = ts->tm_hour +24;
 	}
 	
+	
+	
 	sprintf( string_serial, "\nReceived date/time is: %s \r\n",asctime(ts));
 	UARTWrite(1,string_serial);
+	//inincia o RTCC tendo como base ts
 	RTCCSet(ts);
+	
+	RTCCAlarmConf(ts,REPEAT_INFINITE, EVERY_HALF_SEC, &set_analogOutput);
+	
+	IOInit(p17,out); 
+	
 	while(1)
 	{
-		vTaskDelay(1000);
+		//vTaskDelay(500);
+		//IOPut(p17,on);
 		RTCCGet(&mytime);//pega o tempo e a data atual
 		sprintf(string_serial,"\nAtual date/time is: %s \r\n",asctime(&mytime));
 		UARTWrite(1,string_serial);
+		
+		//vTaskDelay(500);
+		//IOPut(p17,off);
 	}
 		
 	
 	
 	
 }
+
+
+
 
 
 
