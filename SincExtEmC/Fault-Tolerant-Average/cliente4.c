@@ -33,8 +33,8 @@ void *iniciaTimer(void *args){
             
         //if(t == 5){
         //    t=0;
-            //printf("\ntempo: min = %d, sec = %d\n",current_time->tm_min,current_time->tm_sec); 
-       // }
+        //    printf("\ntempo: min = %d, sec = %d\n",current_time->tm_min,current_time->tm_sec); 
+        //}
             
     }
 
@@ -66,7 +66,7 @@ int main(){
     if(sockfd<0){
         printf("error");
     }
-    char *hello = "alo do cliente 1!";
+    char *hello = "alo do cliente 4!";
     struct sockaddr_in serv_addr;
     socklen_t fromlen = sizeof(struct sockaddr_in);
     struct hostent *server;
@@ -81,7 +81,7 @@ int main(){
     start_t = clock();
 
     while(1){
-        printf("Cliente  1  \n");
+        printf("Cliente  4  \n");
 
         //sleep(5);
 
@@ -95,6 +95,7 @@ int main(){
         if(current_time->tm_sec - server_time->tm_sec >0.100){
             printf("TEMPO CORRIGIDO!");
             current_time = server_time;
+
         }        
 
 
